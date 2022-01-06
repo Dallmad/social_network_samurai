@@ -1,0 +1,10 @@
+.nav {
+    grid-area: n;
+    background-color: #de9b87;
+}
+.item {
+    color: aliceblue;
+}
+.item.active {
+    color: chocolate;
+}
