@@ -1,29 +1,17 @@
 import React from 'react';
 import './App.css'
+import {Header} from "./components/Header";
+import {Navbar} from "./components/Navbar";
+import {Profile} from "./components/Profile";
 
-function App() {
+
+const App = () => {
     return (
         <div className='app-wrapper'>
-            <header className= 'header'>
-                <img src='https://game-tournaments.com/media/b/csbet_right_xray_2.png'/>
-            </header>
-            <nav className='nav'>
-                <div><
-                    a>Profile</a>
-                </div>
-                <div>
-                    <a>Messages</a>
-                </div>
-                <div>
-                    <a>News</a>
-                </div>
-                <div>
-                    <a>Music</a>
-                </div>
-            </nav>
-            <div className='content'>Main content</div>
+            <Header/>
+            <Navbar/>
+            <Profile/>
         </div>
     );
 }
-
 export default App;
