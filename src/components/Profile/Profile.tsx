@@ -1,14 +1,10 @@
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
+import {ProfileInfo} from "./Profile/ProfileInfo";
 
 export const Profile = () => {
     return <div>
-        <div>
-            <img src='https://www.nibib.nih.gov/sites/default/files/2020-12/Abstract-Banner-730x250.jpg'/>
-        </div>
-        <div>
-            ava+descrition
-        </div>
+        <ProfileInfo/>
         <MyPosts/>
     </div>
 }
