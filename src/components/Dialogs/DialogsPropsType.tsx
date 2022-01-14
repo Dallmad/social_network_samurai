@@ -2,8 +2,8 @@ export type DialogsPropsType = {
 
 }
 export type DialogItemPropsType = {
-    name:string
     id:number
+    name:string
 }
 export type MessagePropsType = {
     message:string

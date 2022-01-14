@@ -1,6 +1,6 @@
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
-import {ProfileInfo} from "./Profile/ProfileInfo";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export const Profile = () => {
     return <div>
