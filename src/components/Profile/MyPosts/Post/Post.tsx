@@ -1,6 +1,7 @@
 import s from './Post.module.css'
-import {PostPropsType} from "./PostPropsType";
 import React from "react";
+import {PostPropsType} from "../../../../App";
+
 
 export const Post:React.FC<PostPropsType> = (props) => {
     return <div className={s.item}>
