@@ -4,41 +4,28 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter,Routes,Route,Link} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 
 export type DialogItemPropsType = {
-    id:number
-    name:string
+    id: number
+    name: string
 }
 export type MessagePropsType = {
-    message:string
-    id:number
+    message: string
+    id: number
 }
 export type PostPropsType = {
-    id:number
+    id: number
     message: string
     likesCount: number
 }
+type AppType = {
+    dialogs: DialogItemPropsType[]
+    messages: MessagePropsType[]
+    posts: PostPropsType[]
+}
 
-const App = () => {
-    let dialogs = [
-        {id:1,name:'Dima'},
-        {id:2,name:'Andrey'},
-        {id:3,name:'Sveta'},
-        {id:4,name:'Sasha'},
-        {id:5,name:'Viktor'},
-        {id:6,name:'Valera'}
-    ]
-    let messages = [
-        {id:1,message:'Hi'},
-        {id:2,message:'How is your it-kamasutra?'},
-        {id:3,message:'Yo'}
-    ]
-    let posts = [
-        {id:1,message:'Hi, how are you?',likesCount:11},
-        {id:2,message:'It"s my first post.',likesCount:23},
-    ]
-
+const App: React.FC<AppType> = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -46,8 +33,9 @@ const App = () => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/' element={<Profile posts={posts}/>}/>
-                        <Route path='/messages/*' element={<Dialogs dialogs={dialogs}  messages={messages}/>}/>
+                        <Route path='/' element={<Profile posts={props.posts}/>}/>
+                        <Route path='/messages/*'
+                               element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
 
                     </Routes>
                 </div>

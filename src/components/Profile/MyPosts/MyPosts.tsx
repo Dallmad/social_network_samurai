@@ -10,8 +10,7 @@ type MyPostType={
 export const MyPosts:React.FC<MyPostType> = (props) => {
 
     let postElements = props.posts.map( p=>
-        <Post id={p.id} message={p.message} likesCount={p.likesCount}/>
-    )
+        <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
     return <div className={s.postBlock}>
         <h3> My post </h3>
             <div>
