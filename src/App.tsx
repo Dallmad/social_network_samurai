@@ -5,27 +5,10 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {stateType} from "./redux/state";
 
-export type DialogItemPropsType = {
-    id: number
-    name: string
-}
-export type MessagePropsType = {
-    message: string
-    id: number
-}
-export type PostPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-type AppType = {
-    dialogs: DialogItemPropsType[]
-    messages: MessagePropsType[]
-    posts: PostPropsType[]
-}
 
-const App: React.FC<AppType> = (props) => {
+const App: React.FC<stateType> = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
