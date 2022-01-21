@@ -37,5 +37,6 @@ export let state = {
             {id: 2, message: 'How is your it-kamasutra?'},
             {id: 3, message: 'Yo'}
         ]
-    }
+    },
+    sidebar:{}
 }
