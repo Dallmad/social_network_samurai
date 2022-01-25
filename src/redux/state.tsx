@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type DialogItemPropsType = {
     id: number
     name: string
@@ -12,11 +14,11 @@ export type PostPropsType = {
     likesCount: number
 }
 export type stateType = {
-    dialogs: DialogItemPropsType[]
-    messages: MessagePropsType[]
-    posts: PostPropsType[]
+    profilePage: {posts:PostPropsType[]}
+    dialogsPage: {dialogs:DialogItemPropsType[],messages:MessagePropsType[]}
 }
-export let state = {
+
+export let state: stateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 11},
@@ -37,6 +39,14 @@ export let state = {
             {id: 2, message: 'How is your it-kamasutra?'},
             {id: 3, message: 'Yo'}
         ]
-    },
-    sidebar:{}
+    }
+}
+export let addPost = (postMessage:string)=>{
+    let newPost:PostPropsType = {
+        id:5,
+        message:postMessage,
+        likesCount:0
+    }
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }

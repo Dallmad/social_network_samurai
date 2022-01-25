@@ -5,20 +5,31 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
-import {stateType} from "./redux/state";
+import {DialogItemPropsType, MessagePropsType, PostPropsType, stateType} from "./redux/state";
 
+type AppType = {
+    profilePage:{posts:PostPropsType[]}
+    dialogsPage:{dialogs:DialogItemPropsType[],messages:MessagePropsType[]}
+    addPost:(postMessage:string)=>void
+}
 
-const App: React.FC<stateType> = (props) => {
+const App: React.FC<AppType> = (props) => {
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/' element={<Profile posts={props.posts}/>}/>
-                    <Route path='/messages/*'
-                           element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-
+                    <Route path='/'
+                           element={<Profile
+                               posts={props.profilePage.posts}
+                               addPost={props.addPost}
+                           />}
+                    />
+                    <Route path='/messages/*' element={<Dialogs
+                               dialogs={props.dialogsPage.dialogs}
+                               messages={props.dialogsPage.messages}
+                               />}/>
                 </Routes>
             </div>
         </div>
