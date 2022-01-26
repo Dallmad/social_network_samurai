@@ -5,12 +5,13 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
-import {DialogItemPropsType, MessagePropsType, PostPropsType, stateType} from "./redux/state";
+import {DialogItemPropsType, MessagePropsType, PostPropsType} from "./redux/state";
 
 type AppType = {
-    profilePage:{posts:PostPropsType[]}
+    profilePage:{posts:PostPropsType[],messageForNewPost:string}
     dialogsPage:{dialogs:DialogItemPropsType[],messages:MessagePropsType[]}
-    addPost:(postMessage:string)=>void
+    addPostCallback:(post: string)=>void
+    changeNewText:(newText: string)=>void
 }
 
 const App: React.FC<AppType> = (props) => {
@@ -22,8 +23,9 @@ const App: React.FC<AppType> = (props) => {
                 <Routes>
                     <Route path='/'
                            element={<Profile
-                               posts={props.profilePage.posts}
-                               addPost={props.addPost}
+                               posts={props.profilePage}
+                               addPostCallback={props.addPostCallback}
+                               changeNewText={props.changeNewText}
                            />}
                     />
                     <Route path='/messages/*' element={<Dialogs

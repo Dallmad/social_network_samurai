@@ -3,15 +3,18 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import React from "react";
 import {PostPropsType} from "../../redux/state";
 
- type ProfileType = {
-    posts:PostPropsType[]
-    addPost:(postMessage:string)=>void
+type ProfileType = {
+    posts: { posts: PostPropsType[], messageForNewPost: string }
+    addPostCallback: (postMessage: string) => void
+    changeNewText: (newText: string) => void
 }
-export const Profile:React.FC<ProfileType> = (props) => {
+export const Profile: React.FC<ProfileType> = (props) => {
     return <div>
         <ProfileInfo/>
-        <MyPosts posts={props.posts}
-                 addPost={props.addPost}
+        <MyPosts
+            posts={props.posts}
+            addPostCallback={props.addPostCallback}
+            changeNewTextCallback={props.changeNewText}
         />
     </div>
 }
