@@ -14,8 +14,8 @@ export type PostPropsType = {
     likesCount: number
 }
 export type stateType = {
-    profilePage: {posts:PostPropsType[]}
-    dialogsPage: {dialogs:DialogItemPropsType[],messages:MessagePropsType[]}
+    profilePage: { posts: PostPropsType[], messageForNewPost: string }
+    dialogsPage: { dialogs: DialogItemPropsType[], messages: MessagePropsType[] }
 }
 
 export let state: stateType = {
@@ -23,7 +23,8 @@ export let state: stateType = {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 11},
             {id: 2, message: 'It"s my first post.', likesCount: 23},
-        ]
+        ],
+        messageForNewPost: ''
     },
     dialogsPage: {
         dialogs: [
@@ -41,12 +42,17 @@ export let state: stateType = {
         ]
     }
 }
-export let addPost = (postMessage:string)=>{
-    let newPost:PostPropsType = {
-        id:5,
-        message:postMessage,
-        likesCount:0
+export let addPost = (post: string) => {
+    const newPost: PostPropsType = {
+        id: 5,
+        message: state.profilePage.messageForNewPost,
+        likesCount: 0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.messageForNewPost=''
+    rerenderEntireTree(state)
+}
+export let changeNewText = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
     rerenderEntireTree(state)
 }
