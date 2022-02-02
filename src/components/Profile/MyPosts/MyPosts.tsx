@@ -14,10 +14,10 @@ export const MyPosts: React.FC<MyPostType> = (props) => {
     let postElements = props.posts.posts.map(p =>
         <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
-    const addPost = () => {
+    let addPost = () => {
         props.addPostCallback(props.posts.messageForNewPost)
     }
-    const newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    let newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
         props.changeNewTextCallback(e.currentTarget.value)}
 
     return <div className={s.postBlock}>
