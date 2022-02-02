@@ -1,22 +1,20 @@
 import React from 'react';
+import './index.css';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import {addPost, stateType, changeNewText} from './redux/state'
+import {store} from './redux/state'
 
-export let rerenderEntireTree = (state:stateType) => {
+
+
+export const RerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App
-                    profilePage={state.profilePage}
-                    dialogsPage={state.dialogsPage}
-                    addPostCallback={addPost}
-                    changeNewText={changeNewText}
-                />
+                <App store={store}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
-    );
+    )
 }

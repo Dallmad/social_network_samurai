@@ -5,16 +5,14 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
-import {DialogItemPropsType, MessagePropsType, PostPropsType} from "./redux/state";
+import {StoreType} from './redux/state'
 
-type AppType = {
-    profilePage:{posts:PostPropsType[],messageForNewPost:string}
-    dialogsPage:{dialogs:DialogItemPropsType[],messages:MessagePropsType[]}
-    addPostCallback:(post: string)=>void
-    changeNewText:(newText: string)=>void
+type AppPropsType = {
+    store: StoreType
 }
 
-const App: React.FC<AppType> = (props) => {
+const App: React.FC<AppPropsType> = (props) => {
+    const state = props.store.getState()
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -23,14 +21,14 @@ const App: React.FC<AppType> = (props) => {
                 <Routes>
                     <Route path='/'
                            element={<Profile
-                               posts={props.profilePage}
-                               addPostCallback={props.addPostCallback}
-                               changeNewText={props.changeNewText}
+                               posts={state.profilePage}
+                               addPostCallback={props.store.addPostCallback.bind(props.store)}
+                               changeNewTextCallback={props.store.changeNewTextCallback.bind(props.store)}
                            />}
                     />
                     <Route path='/messages/*' element={<Dialogs
-                               dialogs={props.dialogsPage.dialogs}
-                               messages={props.dialogsPage.messages}
+                               dialogs={state.dialogsPage.dialogs}
+                               messages={state.dialogsPage.messages}
                                />}/>
                 </Routes>
             </div>
