@@ -7,7 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import {store} from './redux/state'
 
 
-
 export const RerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>

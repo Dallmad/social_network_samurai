@@ -22,14 +22,13 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path='/'
                            element={<Profile
                                posts={state.profilePage}
-                               addPostCallback={props.store.addPostCallback.bind(props.store)}
-                               changeNewTextCallback={props.store.changeNewTextCallback.bind(props.store)}
+                               dispatch={props.store.dispatch.bind(props.store)}
                            />}
                     />
                     <Route path='/messages/*' element={<Dialogs
-                               dialogs={state.dialogsPage.dialogs}
-                               messages={state.dialogsPage.messages}
-                               />}/>
+                        dialogs={state.dialogsPage.dialogs}
+                        messages={state.dialogsPage.messages}
+                    />}/>
                 </Routes>
             </div>
         </div>
