@@ -1,8 +1,7 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import React, {ChangeEvent} from "react";
-import {ActionsTypes, PostPropsType} from "../../../redux/state";
-
+import {ActionsTypes, PostPropsType, addPostCallbackAC, changeNewTextCallbackAC} from "../../../redux/state";
 
 type MyPostType = {
     posts: { posts: PostPropsType[], messageForNewPost: string }
@@ -10,14 +9,14 @@ type MyPostType = {
 }
 
 export const MyPosts: React.FC<MyPostType> = (props) => {
-    let postElements = props.posts.posts.map(p =>
+    const postElements = props.posts.posts.map(p =>
         <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
-    let addPost = () => {
-        props.dispatch({type: 'ADD-POST-CALLBACK', postText: props.posts.messageForNewPost})
+    const addPost = () => {
+        props.dispatch(addPostCallbackAC(props.posts.messageForNewPost))
     }
-    let newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'CHANGE-NEW-TEXT-CALLBACK', newText: e.currentTarget.value})
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changeNewTextCallbackAC(e.currentTarget.value))
     }
 
     return <div className={s.postBlock}>

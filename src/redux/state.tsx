@@ -1,3 +1,9 @@
+const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
+const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
+const CHANGE_NEW_MESSAGE_BODY_CALLBACK = 'CHANGE-NEW-MESSAGE_BODY-CALLBACK'     //UPDATE_NEW_MESSAGE_BODY on js
+const SEND_MESSAGE_CALLBACK = 'SEND_MESSAGE_CALLBACK'       //SEND_MESSAGE_CREATOR on js
+
+
 export type DialogItemPropsType = {
     id: number
     name: string
@@ -13,26 +19,21 @@ export type PostPropsType = {
 }
 export type stateType = {
     profilePage: { posts: PostPropsType[], messageForNewPost: string }
-    dialogsPage: { dialogs: DialogItemPropsType[], messages: MessagePropsType[] }
+    dialogsPage: { dialogs: DialogItemPropsType[], messages: MessagePropsType[], newMessageBody: string }
 }
 export type StoreType = {
     _state: stateType
-    // addPostCallback: (post: string) => void
-    // changeNewTextCallback: (newText: string) => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => stateType
     dispatch: (action: ActionsTypes) => void
 }
-type AddPostCallback = {
-    type: 'ADD-POST-CALLBACK'
-    postText:string
-}
-type ChangeNewTextCallback = {
-    type: 'CHANGE-NEW-TEXT-CALLBACK'
-    newText: string
-}
-export type ActionsTypes = AddPostCallback | ChangeNewTextCallback
+export type ActionsTypes =
+    ReturnType<typeof addPostCallbackAC> |
+    ReturnType<typeof changeNewTextCallbackAC> |
+    ReturnType<typeof changeNewMessageBodyCallbackAC> |
+    ReturnType<typeof sendMessageCallbackAC>
+
 
 export const store: StoreType = {
     _state: {
@@ -56,13 +57,13 @@ export const store: StoreType = {
                 {id: 1, message: 'Hi'},
                 {id: 2, message: 'How is your it-kamasutra?'},
                 {id: 3, message: 'Yo'}
-            ]
+            ],
+            newMessageBody: ''
         }
     },
     _onChange() {
         console.log('State changed')
     }, //_callSubscriber on js samurai
-
     getState() {
         return this._state
     },
@@ -70,8 +71,8 @@ export const store: StoreType = {
         this._onChange = callback
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST-CALLBACK') {
-            // const postText = this._state.profilePage.messageForNewPost
+        if (action.type === ADD_POST_CALLBACK) {
+             // const postText = this._state.profilePage.messageForNewPost
             const newPost: PostPropsType = {
                 id: 5,
                 message: action.postText,
@@ -80,24 +81,34 @@ export const store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.messageForNewPost = ''
             this._onChange()
-        } else if (action.type === 'CHANGE-NEW-TEXT-CALLBACK') {
+        } else if (action.type === CHANGE_NEW_TEXT_CALLBACK) {
             this._state.profilePage.messageForNewPost = action.newText   //updateNewPostText
             this._onChange()
+        } else if (action.type === CHANGE_NEW_MESSAGE_BODY_CALLBACK) {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._onChange()
+        } else if (action.type === SEND_MESSAGE_CALLBACK) {
+            let body=this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.messages.push({id: 4, message: body})
+            this._state.dialogsPage.newMessageBody = ''
+            this._onChange()
         }
-    },
-
-    /*   addPostCallback (post: string) {
-           const newPost: PostPropsType = {
-               id: 5,
-               message: this._state.profilePage.messageForNewPost,
-               likesCount: 0
-           }
-           this._state.profilePage.posts.push(newPost)
-           this._state.profilePage.messageForNewPost=''
-           this._onChange()
-       },
-       changeNewTextCallback (newText: string) {   //name function on js samurai -
-           this._state.profilePage.messageForNewPost = newText   //updateNewPostText
-           this._onChange()
-       }*/
+    }
 }
+
+export const addPostCallbackAC = (postText: string) => ({
+    type: ADD_POST_CALLBACK,
+    postText: postText
+}) as const
+export const changeNewTextCallbackAC = (newText: string) => ({
+    type: CHANGE_NEW_TEXT_CALLBACK,
+    newText: newText
+}) as const
+export const changeNewMessageBodyCallbackAC = (body: string) => ({
+    type: CHANGE_NEW_MESSAGE_BODY_CALLBACK,
+    body: body
+}) as const
+export const sendMessageCallbackAC = (body: string) => ({
+    type: SEND_MESSAGE_CALLBACK,
+    body: body
+}) as const

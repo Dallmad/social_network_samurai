@@ -28,6 +28,8 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path='/messages/*' element={<Dialogs
                         dialogs={state.dialogsPage.dialogs}
                         messages={state.dialogsPage.messages}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                        newMessageBody={state.dialogsPage.newMessageBody}
                     />}/>
                 </Routes>
             </div>
