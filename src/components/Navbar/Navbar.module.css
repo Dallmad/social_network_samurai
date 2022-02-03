@@ -1,12 +1,16 @@
 .nav {
     grid-area: n;
-    background-color: #de9b87;
+    background-color: rgba(18, 18, 45, 0.85);
     padding: 20px;
+
 }
 .item a{
-    color: aliceblue;
-    text-decoration:none;
+    color: rgba(159, 143, 151, 0.90);
+    text-decoration: none;
+    font-size: 14pt;
+
 }
 .item a.active {
     color: gold;
+
 }

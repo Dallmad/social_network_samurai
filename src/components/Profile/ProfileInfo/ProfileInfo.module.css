@@ -1,4 +1,10 @@
 
 .descriptionBlock {
     padding: 10px;
+    color: rgba(162, 122, 122, 0.85);
+}
+.img {
+    width: auto;
+    height: 200px;
+    padding: 10px;
 }
