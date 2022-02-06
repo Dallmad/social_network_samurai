@@ -95,7 +95,6 @@ export const store: StoreType = {
         }
     }
 }
-
 export const addPostCallbackAC = (postText: string) => ({
     type: ADD_POST_CALLBACK,
     postText: postText
