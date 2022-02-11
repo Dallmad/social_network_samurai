@@ -1,7 +1,7 @@
 import {ActionsTypes, DialogItemPropsType, MessagePropsType} from "./state";
 
-export const CHANGE_NEW_MESSAGE_BODY_CALLBACK = 'CHANGE-NEW-MESSAGE_BODY-CALLBACK'     //UPDATE_NEW_MESSAGE_BODY on js
-export const SEND_MESSAGE_CALLBACK = 'SEND_MESSAGE_CALLBACK'       //SEND_MESSAGE_CREATOR on js
+const CHANGE_NEW_MESSAGE_BODY_CALLBACK = 'CHANGE-NEW-MESSAGE_BODY-CALLBACK'     //UPDATE_NEW_MESSAGE_BODY on js
+const SEND_MESSAGE_CALLBACK = 'SEND_MESSAGE_CALLBACK'       //SEND_MESSAGE_CREATOR on js
 
 export const dialogsReduser = (state: {
                                    dialogs: DialogItemPropsType[],
@@ -22,3 +22,11 @@ export const dialogsReduser = (state: {
             return state
     }
 }
+export const changeNewMessageBodyCallbackAC = (body: string) => ({
+    type: CHANGE_NEW_MESSAGE_BODY_CALLBACK,
+    body: body
+}) as const
+export const sendMessageCallbackAC = (body: string) => ({
+    type: SEND_MESSAGE_CALLBACK,
+    body: body
+}) as const

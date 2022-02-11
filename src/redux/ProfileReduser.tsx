@@ -1,7 +1,7 @@
 import {ActionsTypes, PostPropsType} from "./state";
 
-export const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
-export const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
+const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
+const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
 
 export const profileReduser = (state:
                                    {
@@ -26,3 +26,11 @@ export const profileReduser = (state:
             return state
     }
 }
+export const addPostCallbackAC = (postText: string) => ({
+    type: ADD_POST_CALLBACK,
+    postText: postText
+}) as const
+export const changeNewTextCallbackAC = (newText: string) => ({
+    type: CHANGE_NEW_TEXT_CALLBACK,
+    newText: newText
+}) as const

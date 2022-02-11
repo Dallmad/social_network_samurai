@@ -1,5 +1,5 @@
-import {ADD_POST_CALLBACK, CHANGE_NEW_TEXT_CALLBACK, profileReduser} from "./ProfileReduser";
-import {CHANGE_NEW_MESSAGE_BODY_CALLBACK, dialogsReduser, SEND_MESSAGE_CALLBACK} from "./DialogsReduser";
+import {addPostCallbackAC, changeNewTextCallbackAC, profileReduser} from "./ProfileReduser";
+import {changeNewMessageBodyCallbackAC, dialogsReduser, sendMessageCallbackAC} from "./DialogsReduser";
 import {sidebarReduser} from "./SidebarReduser";
 
 export type DialogItemPropsType = {
@@ -78,19 +78,19 @@ export const store: StoreType = {
         this._onChange()
     }
 }
-export const addPostCallbackAC = (postText: string) => ({
+/*export const addPostCallbackAC = (postText: string) => ({
     type: ADD_POST_CALLBACK,
     postText: postText
 }) as const
 export const changeNewTextCallbackAC = (newText: string) => ({
     type: CHANGE_NEW_TEXT_CALLBACK,
     newText: newText
-}) as const
-export const changeNewMessageBodyCallbackAC = (body: string) => ({
+}) as const*/
+/*export const changeNewMessageBodyCallbackAC = (body: string) => ({
     type: CHANGE_NEW_MESSAGE_BODY_CALLBACK,
     body: body
 }) as const
 export const sendMessageCallbackAC = (body: string) => ({
     type: SEND_MESSAGE_CALLBACK,
     body: body
-}) as const
+}) as const*/
