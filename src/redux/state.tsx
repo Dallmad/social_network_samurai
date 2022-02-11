@@ -1,8 +1,6 @@
-const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
-const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
-const CHANGE_NEW_MESSAGE_BODY_CALLBACK = 'CHANGE-NEW-MESSAGE_BODY-CALLBACK'     //UPDATE_NEW_MESSAGE_BODY on js
-const SEND_MESSAGE_CALLBACK = 'SEND_MESSAGE_CALLBACK'       //SEND_MESSAGE_CREATOR on js
-
+import {ADD_POST_CALLBACK, CHANGE_NEW_TEXT_CALLBACK, profileReduser} from "./ProfileReduser";
+import {CHANGE_NEW_MESSAGE_BODY_CALLBACK, dialogsReduser, SEND_MESSAGE_CALLBACK} from "./DialogsReduser";
+import {sidebarReduser} from "./SidebarReduser";
 
 export type DialogItemPropsType = {
     id: number
@@ -20,6 +18,7 @@ export type PostPropsType = {
 export type stateType = {
     profilePage: { posts: PostPropsType[], messageForNewPost: string }
     dialogsPage: { dialogs: DialogItemPropsType[], messages: MessagePropsType[], newMessageBody: string }
+    sidebar: {}
 }
 export type StoreType = {
     _state: stateType
@@ -59,7 +58,8 @@ export const store: StoreType = {
                 {id: 3, message: 'Yo'}
             ],
             newMessageBody: ''
-        }
+        },
+        sidebar: {}
     },
     _onChange() {
         console.log('State changed')
@@ -71,28 +71,11 @@ export const store: StoreType = {
         this._onChange = callback
     },
     dispatch(action) {
-        if (action.type === ADD_POST_CALLBACK) {
-             // const postText = this._state.profilePage.messageForNewPost
-            const newPost: PostPropsType = {
-                id: 5,
-                message: action.postText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.messageForNewPost = ''
-            this._onChange()
-        } else if (action.type === CHANGE_NEW_TEXT_CALLBACK) {
-            this._state.profilePage.messageForNewPost = action.newText   //updateNewPostText
-            this._onChange()
-        } else if (action.type === CHANGE_NEW_MESSAGE_BODY_CALLBACK) {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._onChange()
-        } else if (action.type === SEND_MESSAGE_CALLBACK) {
-            let body=this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.messages.push({id: 4, message: body})
-            this._state.dialogsPage.newMessageBody = ''
-            this._onChange()
-        }
+        this._state.profilePage = profileReduser(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReduser(this._state.sidebar, action)
+
+        this._onChange()
     }
 }
 export const addPostCallbackAC = (postText: string) => ({
