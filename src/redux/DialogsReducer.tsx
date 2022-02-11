@@ -1,9 +1,9 @@
-import {ActionsTypes, DialogItemPropsType, MessagePropsType} from "./state";
+import {ActionsTypes, DialogItemPropsType, MessagePropsType} from "./store";
 
 const CHANGE_NEW_MESSAGE_BODY_CALLBACK = 'CHANGE-NEW-MESSAGE_BODY-CALLBACK'     //UPDATE_NEW_MESSAGE_BODY on js
 const SEND_MESSAGE_CALLBACK = 'SEND_MESSAGE_CALLBACK'       //SEND_MESSAGE_CREATOR on js
 
-export const dialogsReduser = (state: {
+export const dialogsReducer = (state: {
                                    dialogs: DialogItemPropsType[],
                                    messages: MessagePropsType[],
                                    newMessageBody: string

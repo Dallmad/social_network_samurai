@@ -1,8 +1,8 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import React, {ChangeEvent} from "react";
-import {ActionsTypes, PostPropsType} from "../../../redux/state";
-import {addPostCallbackAC, changeNewTextCallbackAC} from "../../../redux/ProfileReduser";
+import {ActionsTypes, PostPropsType} from "../../../redux/store";
+import {addPostCallbackAC, changeNewTextCallbackAC} from "../../../redux/ProfileReducer";
 
 type MyPostType = {
     posts: { posts: PostPropsType[], messageForNewPost: string }

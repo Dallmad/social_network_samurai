@@ -1,6 +1,6 @@
-import {addPostCallbackAC, changeNewTextCallbackAC, profileReduser} from "./ProfileReduser";
-import {changeNewMessageBodyCallbackAC, dialogsReduser, sendMessageCallbackAC} from "./DialogsReduser";
-import {sidebarReduser} from "./SidebarReduser";
+import {addPostCallbackAC, changeNewTextCallbackAC, profileReducer} from "./ProfileReducer";
+import {changeNewMessageBodyCallbackAC, dialogsReducer, sendMessageCallbackAC} from "./DialogsReducer";
+import {sidebarReducer} from "./SidebarReducer";
 
 export type DialogItemPropsType = {
     id: number
@@ -71,26 +71,10 @@ export const store: StoreType = {
         this._onChange = callback
     },
     dispatch(action) {
-        this._state.profilePage = profileReduser(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReduser(this._state.sidebar, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
         this._onChange()
     }
 }
-/*export const addPostCallbackAC = (postText: string) => ({
-    type: ADD_POST_CALLBACK,
-    postText: postText
-}) as const
-export const changeNewTextCallbackAC = (newText: string) => ({
-    type: CHANGE_NEW_TEXT_CALLBACK,
-    newText: newText
-}) as const*/
-/*export const changeNewMessageBodyCallbackAC = (body: string) => ({
-    type: CHANGE_NEW_MESSAGE_BODY_CALLBACK,
-    body: body
-}) as const
-export const sendMessageCallbackAC = (body: string) => ({
-    type: SEND_MESSAGE_CALLBACK,
-    body: body
-}) as const*/

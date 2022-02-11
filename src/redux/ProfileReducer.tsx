@@ -1,9 +1,9 @@
-import {ActionsTypes, PostPropsType} from "./state";
+import {ActionsTypes, PostPropsType} from "./store";
 
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
 const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
 
-export const profileReduser = (state:
+export const profileReducer = (state:
                                    {
                                        posts: PostPropsType[],
                                        messageForNewPost: string
