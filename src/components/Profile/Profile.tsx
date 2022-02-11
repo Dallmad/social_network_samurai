@@ -6,8 +6,8 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {StoreType} from "../../redux/ReduxStore";
 
 type ProfileType = {
-    posts: ProfilePageType
-    dispatch:(action: ProfileActionsTypes) => void
+    /*posts: ProfilePageType
+    dispatch:(action: ProfileActionsTypes) => void*/
     store:StoreType
 }
 export const Profile: React.FC<ProfileType> = (props) => {

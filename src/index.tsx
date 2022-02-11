@@ -16,10 +16,8 @@ export const RerenderEntireTree = () => {
         document.getElementById('root')
     )
 }
-
-RerenderEntireTree()
 store.subscribe(()=>RerenderEntireTree())
-
+RerenderEntireTree()
 
 
 
