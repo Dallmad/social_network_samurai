@@ -1,14 +1,32 @@
-import {ActionsTypes, PostPropsType} from "./store";
-
+export type PostPropsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    posts: PostPropsType[]
+    messageForNewPost: string
+}
+export type ProfileActionsTypes =
+    ReturnType<typeof addPostCallbackAC> |
+    ReturnType<typeof changeNewTextCallbackAC>
+/*type ProfileReducerType = {
+    state: ProfilePageType
+    action: ActionsTypes
+}*/
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
 const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
 
-export const profileReducer = (state:
-                                   {
-                                       posts: PostPropsType[],
-                                       messageForNewPost: string
-                                   },
-                               action: ActionsTypes) => {
+let initialState = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 11},
+        {id: 2, message: 'It"s my first post.', likesCount: 23},
+    ],
+    messageForNewPost: ''
+}
+
+export const profileReducer = (state: ProfilePageType = initialState,
+                               action: ProfileActionsTypes) => {
     switch (action.type) {
         case "ADD-POST-CALLBACK":
             const newPost: PostPropsType = {

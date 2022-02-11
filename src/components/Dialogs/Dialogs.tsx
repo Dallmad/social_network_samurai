@@ -2,14 +2,14 @@ import s from './Dialogs.module.css';
 import React, {ChangeEvent} from "react";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsTypes, DialogItemPropsType, MessagePropsType,} from "../../redux/store";
+import {DialogsActionsTypes, DialogItemPropsType, MessagePropsType} from "../../redux/DialogsReducer";
 import {changeNewMessageBodyCallbackAC, sendMessageCallbackAC} from "../../redux/DialogsReducer";
 
 type DialogsType = {
     dialogs: DialogItemPropsType[]
     messages: MessagePropsType[]
     newMessageBody: string
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: DialogsActionsTypes) => void
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
@@ -34,10 +34,10 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
             <div className={s.messages}>
                 <div>{messageElements}</div>
                 <div>
-                    <div><textarea
-                        value={newMessageBody}
-                        onChange={onNewMessageChange}
-                        placeholder='Enter your message'></textarea></div>
+                        <textarea
+                            value={newMessageBody}
+                            onChange={onNewMessageChange}
+                            placeholder='Enter your message'/>
                     <div>
                         <button onClick={onSendMessageClick}>Send</button>
                     </div>

@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import {store} from './redux/state'
+import {store} from './redux/ReduxStore'
 
 
-export const RerenderEntireTree = () => {
+const RerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -17,3 +17,4 @@ export const RerenderEntireTree = () => {
         document.getElementById('root')
     )
 }
+///not using this file

@@ -5,7 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
-import {StoreType} from './redux/state'
+import {StoreType} from './redux/ReduxStore'
 
 type AppPropsType = {
     store: StoreType
@@ -23,6 +23,7 @@ const App: React.FC<AppPropsType> = (props) => {
                            element={<Profile
                                posts={state.profilePage}
                                dispatch={props.store.dispatch.bind(props.store)}
+                               store={props.store}
                            />}
                     />
                     <Route path='/messages/*' element={<Dialogs
