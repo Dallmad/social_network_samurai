@@ -20,17 +20,11 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Routes>
                     <Route path='/'
                            element={<Profile
-                              /* posts={state.profilePage}
-                               dispatch={props.store.dispatch.bind(props.store)}*/
                                store={props.store}
                            />}
                     />
                     <Route path='/messages/*' element={<DialogsContainer
                         store={props.store}
-                        /*dialogs={state.dialogsPage.dialogs}
-                        messages={state.dialogsPage.messages}
-                        dispatch={props.store.dispatch.bind(props.store)}
-                        newMessageBody={state.dialogsPage.newMessageBody}*/
                     />}/>
                 </Routes>
             </div>

@@ -1,7 +1,5 @@
 
 import React from "react";
-import {DialogItem} from "./DialogItem/DialogItem";
-import {Message} from "./Message/Message";
 import {changeNewMessageBodyCallbackAC, sendMessageCallbackAC} from "../../redux/DialogsReducer";
 import {store, StoreType} from "../../redux/ReduxStore";
 import {Dialogs} from "./Dialogs";
