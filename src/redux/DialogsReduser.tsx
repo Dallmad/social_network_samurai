@@ -9,16 +9,16 @@ export const dialogsReduser = (state: {
                                    newMessageBody: string
                                },
                                action: ActionsTypes) => {
-
-    if (action.type === CHANGE_NEW_MESSAGE_BODY_CALLBACK) {
-        state.newMessageBody = action.body
-        //this._onChange()
-    } else if (action.type === SEND_MESSAGE_CALLBACK) {
-        let body = state.newMessageBody
-        state.messages.push({id: 4, message: body})
-        state.newMessageBody = ''
-        //this._onChange()
+    switch (action.type) {
+        case "CHANGE-NEW-MESSAGE_BODY-CALLBACK":
+            state.newMessageBody = action.body
+            return state
+        case "SEND_MESSAGE_CALLBACK":
+            let body = state.newMessageBody
+            state.messages.push({id: 4, message: body})
+            state.newMessageBody = ''
+            return state
+        default:
+            return state
     }
-
-    return state
 }
