@@ -10,10 +10,7 @@ export type ProfilePageType = {
 export type ProfileActionsTypes =
     ReturnType<typeof addPostCallbackAC> |
     ReturnType<typeof changeNewTextCallbackAC>
-/*type ProfileReducerType = {
-    state: ProfilePageType
-    action: ActionsTypes
-}*/
+
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
 const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
 
@@ -26,7 +23,7 @@ let initialState = {
 }
 
 export const profileReducer = (state: ProfilePageType = initialState,
-                               action: ProfileActionsTypes) => {
+                               action: ProfileActionsTypes): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST-CALLBACK":
             const newPost: PostPropsType = {
@@ -34,12 +31,12 @@ export const profileReducer = (state: ProfilePageType = initialState,
                 message: action.postText,
                 likesCount: 0
             }
-            state.posts.push(newPost);
-            state.messageForNewPost = '';
-            return state;
+            const stateCopy = {...state}
+            stateCopy.posts.push(newPost);
+            stateCopy.messageForNewPost = '';
+            return stateCopy;
         case "CHANGE-NEW-TEXT-CALLBACK":
-            state.messageForNewPost = action.newText;
-            return state;
+            return {...state, messageForNewPost: action.newText}
         default:
             return state
     }

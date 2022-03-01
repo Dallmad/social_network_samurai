@@ -1,23 +1,18 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import React, {ChangeEvent} from "react";
-import {PostPropsType} from "../../../redux/ProfileReducer";
+import {PostPropsType} from "../../../redux/profile-reducer";
+import {ProfilePropsType} from './MyPostsContainer';
 
-type MyPostType = {
-    changeNewTextCallback: (e: string) => void
-    addPost: (postText: string) => void
-    posts: PostPropsType[]
-    messageForNewPost: string
-}
-
-export const MyPosts: React.FC<MyPostType> = (props) => {
+export const MyPosts: React.FC<ProfilePropsType> = (props) => {
     const postElements = props.posts.map(p =>
-        <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+        <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onAddPost = () => {
         props.addPost(props.messageForNewPost)
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        console.log(e)
         props.changeNewTextCallback(e.currentTarget.value)
     }
 

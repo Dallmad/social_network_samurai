@@ -7,7 +7,7 @@ export type MessagePropsType = {
     message: string
     id: number
 }
-export type DialogsPageType = {
+export type DialogsPageType = {  //InitialStateType
     dialogs: DialogItemPropsType[]
     messages: MessagePropsType[]
     newMessageBody: string
@@ -36,16 +36,16 @@ let initialState = {
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState,
-                               action: DialogsActionsTypes) => {
+                               action: DialogsActionsTypes): DialogsPageType => {
     switch (action.type) {
         case "CHANGE-NEW-MESSAGE_BODY-CALLBACK":
-            state.newMessageBody = action.body
-            return state
+
+            return {...state, newMessageBody: action.body}
         case "SEND_MESSAGE_CALLBACK":
-            let body = state.newMessageBody
-            state.messages.push({id: 4, message: body})
-            state.newMessageBody = ''
-            return state
+            const stateCopy = {...state}
+            stateCopy.messages.push({id: 4, message: state.newMessageBody})
+            stateCopy.newMessageBody = ''
+            return stateCopy
         default:
             return state
     }
@@ -54,7 +54,6 @@ export const changeNewMessageBodyCallbackAC = (body: string) => ({
     type: CHANGE_NEW_MESSAGE_BODY_CALLBACK,
     body: body
 }) as const
-export const sendMessageCallbackAC = (body: string) => ({
+export const sendMessageCallbackAC = () => ({
     type: SEND_MESSAGE_CALLBACK,
-    body: body
 }) as const
