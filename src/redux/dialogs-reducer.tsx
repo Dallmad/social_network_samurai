@@ -39,10 +39,12 @@ export const dialogsReducer = (state: DialogsPageType = initialState,
                                action: DialogsActionsTypes): DialogsPageType => {
     switch (action.type) {
         case "CHANGE-NEW-MESSAGE_BODY-CALLBACK":
-
             return {...state, newMessageBody: action.body}
         case "SEND_MESSAGE_CALLBACK":
-            const stateCopy = {...state}
+            const stateCopy = {
+                ...state,
+                messages:[...state.messages]
+            }
             stateCopy.messages.push({id: 4, message: state.newMessageBody})
             stateCopy.newMessageBody = ''
             return stateCopy

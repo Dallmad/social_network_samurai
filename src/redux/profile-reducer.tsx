@@ -31,7 +31,10 @@ export const profileReducer = (state: ProfilePageType = initialState,
                 message: action.postText,
                 likesCount: 0
             }
-            const stateCopy = {...state}
+            const stateCopy = {
+                ...state,
+                posts:[...state.posts]
+            }
             stateCopy.posts.push(newPost);
             stateCopy.messageForNewPost = '';
             return stateCopy;
