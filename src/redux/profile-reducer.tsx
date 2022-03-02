@@ -33,10 +33,9 @@ export const profileReducer = (state: ProfilePageType = initialState,
             }
             const stateCopy = {
                 ...state,
-                posts:[...state.posts]
+                posts:[...state.posts, newPost],
+                messageForNewPost:''
             }
-            stateCopy.posts.push(newPost);
-            stateCopy.messageForNewPost = '';
             return stateCopy;
         case "CHANGE-NEW-TEXT-CALLBACK":
             return {...state, messageForNewPost: action.newText}

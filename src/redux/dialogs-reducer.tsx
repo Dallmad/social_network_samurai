@@ -43,10 +43,9 @@ export const dialogsReducer = (state: DialogsPageType = initialState,
         case "SEND_MESSAGE_CALLBACK":
             const stateCopy = {
                 ...state,
-                messages:[...state.messages]
+                messages:[...state.messages, {id: 4, message: state.newMessageBody}],
+                newMessageBody: ''
             }
-            stateCopy.messages.push({id: 4, message: state.newMessageBody})
-            stateCopy.newMessageBody = ''
             return stateCopy
         default:
             return state
