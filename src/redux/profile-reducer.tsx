@@ -31,12 +31,12 @@ export const profileReducer = (state: ProfilePageType = initialState,
                 message: action.postText,
                 likesCount: 0
             }
-            const stateCopy = {
+            return {
                 ...state,
                 posts:[...state.posts, newPost],
                 messageForNewPost:''
             }
-            return stateCopy;
+
         case "CHANGE-NEW-TEXT-CALLBACK":
             return {...state, messageForNewPost: action.newText}
         default:
