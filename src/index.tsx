@@ -7,19 +7,15 @@ import App from './App';
 import {Provider} from 'react-redux';
 
 
-export const RerenderEntireTree = () => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>,
-        document.getElementById('root')
-    )
-}
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+)
 
-store.subscribe(()=>RerenderEntireTree())
-RerenderEntireTree()
 
 
 
