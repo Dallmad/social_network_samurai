@@ -36,7 +36,6 @@ export const profileReducer = (state: ProfilePageType = initialState,
                 posts:[...state.posts, newPost],
                 messageForNewPost:''
             }
-
         case "CHANGE-NEW-TEXT-CALLBACK":
             return {...state, messageForNewPost: action.newText}
         default:

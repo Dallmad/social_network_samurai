@@ -46,7 +46,6 @@ export const dialogsReducer = (state: DialogsPageType = initialState,
                 messages:[...state.messages, {id: 4, message: state.newMessageBody}],
                 newMessageBody: ''
             }
-
         default:
             return state
     }
