@@ -5,16 +5,14 @@ import userPhoto from '../../assets/images/avatar.png'
 import axios from 'axios';
 
 
-export class Users extends React.Component<UsersPropsType>{
+export class Users extends React.Component<UsersPropsType> {
 
-constructor(props:UsersPropsType) {
-    super(props);
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            this.props.setUsers(response.data.items)
-        }
-    )
-}
-
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                this.props.setUsers(response.data.items)
+            }
+        )
+    }
 
     render() {
         return (
@@ -23,15 +21,19 @@ constructor(props:UsersPropsType) {
                     this.props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos!=null ? u.photos: userPhoto} className={s.userPhoto}/>
+                            <img src={u.photos != null ? u.photos : userPhoto} className={s.userPhoto}/>
                         </div>
                         <div>
                             {u.followed ?
                                 <button
-                                    onClick={() => {this.props.follow(u.id)}}
+                                    onClick={() => {
+                                        this.props.follow(u.id)
+                                    }}
                                 >Follow</button>
                                 : <button
-                                    onClick={() => {this.props.unfollow(u.id)}}
+                                    onClick={() => {
+                                        this.props.unfollow(u.id)
+                                    }}
                                 >Unfollow</button>}
                         </div>
                     </span>
