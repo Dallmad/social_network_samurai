@@ -4,24 +4,22 @@ import s from './users.module.css'
 import userPhoto from '../../assets/images/avatar.png'
 import axios from 'axios';
 
-
-export class Users extends React.Component<UsersPropsType>{
-
-    getUsers = () => {
-        if (this.props.users.length === 0) {
+export const UsersFC: React.FC<UsersPropsType> = (props) => {
+    const getUsers = () => {
+        if (props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                    this.props.setUsers(response.data.items)
+                    props.setUsers(response.data.items)
                 }
             )
         }
     }
 
-    render() {
-        return (
-            <div>
-                <button onClick={this.getUsers}>Get Users</button>
-                {
-                    this.props.users.map(u => <div key={u.id}>
+
+    return (
+        <div>
+            <button onClick={getUsers}>Get Users</button>
+            {
+                props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <img src={u.photos!=null ? u.photos: userPhoto} className={s.userPhoto}/>
@@ -29,14 +27,14 @@ export class Users extends React.Component<UsersPropsType>{
                         <div>
                             {u.followed ?
                                 <button
-                                    onClick={() => {this.props.follow(u.id)}}
+                                    onClick={() => {props.follow(u.id)}}
                                 >Follow</button>
                                 : <button
-                                    onClick={() => {this.props.unfollow(u.id)}}
+                                    onClick={() => {props.unfollow(u.id)}}
                                 >Unfollow</button>}
                         </div>
                     </span>
-                        <span>
+                    <span>
                         <span>
                             <div>
                                 {u.name}
@@ -54,9 +52,8 @@ export class Users extends React.Component<UsersPropsType>{
                             </div>
                          </span>
                     </span>
-                    </div>)
-                }
-            </div>
-        );
-    }
+                </div>)
+            }
+        </div>
+    );
 }
