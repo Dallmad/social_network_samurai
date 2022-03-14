@@ -22,7 +22,7 @@ export const UsersFC: React.FC<UsersPropsType> = (props) => {
                 props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos!=null ? u.photos: userPhoto} className={s.userPhoto}/>
+                            <img src={u.photos.small!=null ? u.photos.small: userPhoto} className={s.userPhoto}/>
                         </div>
                         <div>
                             {u.followed ?
