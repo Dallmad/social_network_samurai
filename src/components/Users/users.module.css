@@ -3,6 +3,14 @@
     height: 80px;
     border-radius: 50%;
 }
+
 .selectedPage {
     font-weight: bold;
+}
+
+.preloader {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    margin: 1% 20%;
 }
