@@ -12,8 +12,8 @@ export type DialogsPageType = {  //InitialStateType
     messages: MessagePropsType[]
     newMessageBody: string
 }
-export type DialogsActionsTypes = ReturnType<typeof changeNewMessageBodyCallbackAC> |
-    ReturnType<typeof sendMessageCallbackAC>
+export type DialogsActionsTypes = ReturnType<typeof changeNewMessageBodyCallback> |
+    ReturnType<typeof sendMessageCallback>
 
 const CHANGE_NEW_MESSAGE_BODY_CALLBACK = 'CHANGE-NEW-MESSAGE_BODY-CALLBACK'     //UPDATE_NEW_MESSAGE_BODY on js
 const SEND_MESSAGE_CALLBACK = 'SEND_MESSAGE_CALLBACK'       //SEND_MESSAGE_CREATOR on js
@@ -50,10 +50,10 @@ export const dialogsReducer = (state: DialogsPageType = initialState,
             return state
     }
 }
-export const changeNewMessageBodyCallbackAC = (body: string) => ({
+export const changeNewMessageBodyCallback = (body: string) => ({
     type: CHANGE_NEW_MESSAGE_BODY_CALLBACK,
     body: body
 }) as const
-export const sendMessageCallbackAC = () => ({
+export const sendMessageCallback = () => ({
     type: SEND_MESSAGE_CALLBACK,
 }) as const

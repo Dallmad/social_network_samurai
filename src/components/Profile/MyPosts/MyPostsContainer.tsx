@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostCallbackAC, changeNewTextCallbackAC, PostPropsType} from '../../../redux/profile-reducer';
+import {addPostCallback, changeNewTextCallback, PostPropsType} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -24,12 +24,15 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addPost: (postText) => {
-            dispatch(addPostCallbackAC(postText))
+            dispatch(addPostCallback(postText))
         },
         changeNewTextCallback: (text) => {
-            dispatch(changeNewTextCallbackAC(text))
+            dispatch(changeNewTextCallback(text))
         }
     }
 }
 
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps, {
+    addPost:addPostCallback,
+    changeNewTextCallback
+})(MyPosts)

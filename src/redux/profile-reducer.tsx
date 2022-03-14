@@ -8,8 +8,8 @@ export type ProfilePageType = {
     messageForNewPost: string
 }
 export type ProfileActionsTypes =
-    ReturnType<typeof addPostCallbackAC> |
-    ReturnType<typeof changeNewTextCallbackAC>
+    ReturnType<typeof addPostCallback> |
+    ReturnType<typeof changeNewTextCallback>
 
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
 const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
@@ -42,11 +42,11 @@ export const profileReducer = (state: ProfilePageType = initialState,
             return state
     }
 }
-export const addPostCallbackAC = (postText: string) => ({
+export const addPostCallback = (postText: string) => ({
     type: ADD_POST_CALLBACK,
     postText: postText
 }) as const
-export const changeNewTextCallbackAC = (newText: string) => ({
+export const changeNewTextCallback = (newText: string) => ({
     type: CHANGE_NEW_TEXT_CALLBACK,
     newText: newText
 }) as const

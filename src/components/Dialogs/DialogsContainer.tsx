@@ -1,9 +1,9 @@
 import React from 'react';
-import {changeNewMessageBodyCallbackAC, DialogsPageType, sendMessageCallbackAC} from '../../redux/dialogs-reducer';
+import {changeNewMessageBodyCallback, DialogsPageType, sendMessageCallback} from '../../redux/dialogs-reducer';
 import {AppStateType} from '../../redux/redux-store';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
+
 
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
@@ -19,14 +19,8 @@ let mapStateToProps = (state:AppStateType ): MapStatePropsType => {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
-    return {
-        updateNewMessageBody: (body) => {
-            dispatch(changeNewMessageBodyCallbackAC(body))
-        },
-        sendMessage: () => {
-            dispatch(sendMessageCallbackAC())
-        }
-    }
-}
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+export const DialogsContainer = connect(mapStateToProps, {
+    updateNewMessageBody: changeNewMessageBodyCallback,
+    sendMessage:sendMessageCallback
+})(Dialogs)
