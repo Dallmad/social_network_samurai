@@ -1,10 +1,9 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import React, {ChangeEvent} from "react";
-import {PostPropsType} from "../../../redux/profile-reducer";
-import {ProfilePropsType} from './MyPostsContainer';
+import {PostContainerPropsType} from './MyPostsContainer';
 
-export const MyPosts: React.FC<ProfilePropsType> = (props) => {
+export const MyPosts: React.FC<PostContainerPropsType> = (props) => {
     const postElements = props.posts.map(p =>
         <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>)
 

@@ -2,20 +2,21 @@ import s from './users.module.css';
 import userPhoto from '../../assets/images/img.png';
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
+import {NavLink} from 'react-router-dom';
 
 
 type UsersFCPropsType = {
-    totalUsersCount:number
-    pageSize:number
-    currentPage:number
-    onPagesChanged:(pageNumber: number)=> void
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPagesChanged: (pageNumber: number) => void
     users: UserType[]
-    follow:(userId: number) => void
-    unfollow:(userId: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
 }
 
 
-export const Users:React.FC<UsersFCPropsType> = (props) => {
+export const Users: React.FC<UsersFCPropsType> = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages: number[] = []
@@ -37,7 +38,9 @@ export const Users:React.FC<UsersFCPropsType> = (props) => {
                 props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={'/profile/' + u.id}>
                             <img src={u.photos.small ? u.photos.small : userPhoto} className={s.userPhoto}/>
+                                </NavLink>
                         </div>
                         <div>
                             {u.followed ?
@@ -62,7 +65,7 @@ export const Users:React.FC<UsersFCPropsType> = (props) => {
                                 {u.status}
                             </div>
                         </span>
-              {/*          <span>
+                        {/*          <span>
                             <div>
                                 {'country'}
                             </div>

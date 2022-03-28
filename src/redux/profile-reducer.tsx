@@ -1,3 +1,8 @@
+const ADD_POST_CALLBACK = 'ADD_POST_CALLBACK'
+const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE_NEW_TEXT_CALLBACK'     //UPDATE_NEW_POST_TEXT on js
+const SET_USER_PROFILE = 'SET_USER_PROFILE'     //UPDATE_NEW_POST_TEXT on js
+
+
 export type PostPropsType = {
     id: number
     message: string
@@ -6,26 +11,26 @@ export type PostPropsType = {
 export type ProfilePageType = {
     posts: PostPropsType[]
     messageForNewPost: string
+    profile: null
 }
+
 export type ProfileActionsTypes =
     ReturnType<typeof addPostCallback> |
-    ReturnType<typeof changeNewTextCallback>
-
-const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK'
-const CHANGE_NEW_TEXT_CALLBACK = 'CHANGE-NEW-TEXT-CALLBACK'     //UPDATE_NEW_POST_TEXT on js
+    ReturnType<typeof changeNewTextCallback> | ReturnType<typeof setUserProfile>
 
 let initialState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 11},
         {id: 2, message: 'It"s my first post.', likesCount: 23},
     ],
-    messageForNewPost: ''
+    messageForNewPost: '',
+    profile: null
 }
 
 export const profileReducer = (state: ProfilePageType = initialState,
                                action: ProfileActionsTypes): ProfilePageType => {
     switch (action.type) {
-        case "ADD-POST-CALLBACK":
+        case ADD_POST_CALLBACK:
             const newPost: PostPropsType = {
                 id: 5,
                 message: action.postText,
@@ -36,17 +41,23 @@ export const profileReducer = (state: ProfilePageType = initialState,
                 posts:[...state.posts, newPost],
                 messageForNewPost:''
             }
-        case "CHANGE-NEW-TEXT-CALLBACK":
+        case CHANGE_NEW_TEXT_CALLBACK:
             return {...state, messageForNewPost: action.newText}
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile}
         default:
             return state
     }
 }
 export const addPostCallback = (postText: string) => ({
     type: ADD_POST_CALLBACK,
-    postText: postText
+    postText
 }) as const
 export const changeNewTextCallback = (newText: string) => ({
     type: CHANGE_NEW_TEXT_CALLBACK,
-    newText: newText
+    newText
+}) as const
+export const setUserProfile = (profile: null) => ({
+    type: SET_USER_PROFILE,
+    profile
 }) as const
