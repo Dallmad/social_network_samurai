@@ -1,23 +1,32 @@
 import s from './ProfileInfo.module.css'
 import {Preloader} from '../../common/preloader/Preloader';
 
-type ProfileInfoType = {
-    profile: ProfileType | null
-    setUserProfile: (profile: null) => void
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
-type PhotoType = {
+type PhotosType = {
     small: string
     large: string
 }
 type ProfileType = {
-    aboutMe: string
-    contacts: {}
-    fullName: string
+    userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    photos: PhotoType
-    userId: number
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
 }
+type ProfileInfoType = {
+    profile: ProfileType | null
+}
+
 export const ProfileInfo = (props:ProfileInfoType) => {
     if (!props.profile) {
         return <Preloader/>
@@ -28,7 +37,8 @@ export const ProfileInfo = (props:ProfileInfoType) => {
         </div>
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large}/>
-            ava+descrition
+            <div>{props.profile.fullName}</div>
+            <div>{props.profile.lookingForAJobDescription}</div>
         </div>
     </div>
 }

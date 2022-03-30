@@ -27,8 +27,8 @@ export const Users: React.FC<UsersFCPropsType> = (props) => {
     return (
         <div>
             <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p ? s.selectedPage : ''} onClick={() => {
+                {pages.map((p,i) => {
+                    return <span key={p+'-'+i} className={props.currentPage === p ? s.selectedPage : ''} onClick={() => {
                         props.onPagesChanged(p)
                     }}>{p}</span>
                 })
