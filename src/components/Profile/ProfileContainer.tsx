@@ -8,11 +8,10 @@ import {useMatch, useParams} from 'react-router-dom';
 
 
 export const ProfileContainer: FC<ProfilePropsType> = (props) => {
-    const params = useParams();
-    let userId = params.userId
-    console.log('userId:' + userId)
-    if (!userId) {userId='25'}
+    const params = useParams<'*'>();
 
+    let userId = params['*']
+    if (!userId) {userId='25'}
     useEffect(() => {
             axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
                 props.setUserProfile(response.data)
