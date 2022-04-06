@@ -11,14 +11,14 @@ import {Preloader} from '../common/preloader/Preloader';
 class HeaderContainer extends React.Component<AuthPropsType>{
 
     componentDidMount() {
-       /* this.props.toggleIsFetching(true)*/
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
             withCredentials: true
         })
             .then(response => {
 
                 if (response.data.resultCode === 0) {
-                    // this.props.toggleIsFetching(false)
+                    this.props.toggleIsFetching(false)
                     let {id,login,email} = response.data.data
                     this.props.setUserData(id,login,email)
                 }
@@ -31,9 +31,6 @@ class HeaderContainer extends React.Component<AuthPropsType>{
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Header {...this.props}
-            /*data={this.props.data}
-            isAuth={this.props.isAuth}
-            isFetching={this.props.isFetching}*/
         />
         </>
     }

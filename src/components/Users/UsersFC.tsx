@@ -14,7 +14,6 @@ export const UsersFC: React.FC<UsersPropsType> = (props) => {
         }
     }
 
-
     return (
         <div>
             <button onClick={getUsers}>Get Users</button>
