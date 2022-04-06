@@ -14,6 +14,8 @@ type UsersFCPropsType = {
     users: UserType[]
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    toggleIsFollowingProgress: (userId: number,isFetching: boolean) => void
+    followingInProgress: number[]
 }
 
 
@@ -46,8 +48,9 @@ export const Users: React.FC<UsersFCPropsType> = (props) => {
                         </div>
                         <div>
                             {u.followed ?
-                                <button
+                                <button disabled={props.followingInProgress.some(id => id===u.id)}
                                     onClick={() => {
+                                        props.toggleIsFollowingProgress(u.id,true)
                                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                             withCredentials: true,
                                             headers: {
@@ -56,13 +59,15 @@ export const Users: React.FC<UsersFCPropsType> = (props) => {
                                         })
                                             .then(response => {
                                                     if (response.data.resultCode === 0) {props.unfollow(u.id)}
+                                                props.toggleIsFollowingProgress(u.id,false)
                                                 }
                                             )
                                     }
                                     }
                                 >Unfollow</button>
-                                :<button
+                                :<button disabled={props.followingInProgress.some(id => id===u.id)}
                                     onClick={() => {
+                                        props.toggleIsFollowingProgress(u.id,true)
                                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                             withCredentials: true,
                                             headers: {
@@ -71,6 +76,7 @@ export const Users: React.FC<UsersFCPropsType> = (props) => {
                                         })
                                             .then(response => {
                                                     if (response.data.resultCode === 0) {props.follow(u.id)}
+                                                props.toggleIsFollowingProgress(u.id,false)
                                                 }
                                             )
                                     }
