@@ -1,7 +1,7 @@
 import s from './users.module.css';
 import userPhoto from '../../assets/images/img.png';
 import React from 'react';
-import {follow, unfollow, UserType} from '../../redux/users-reducer';
+import {UserType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 import {usersAPI} from '../../api/api';

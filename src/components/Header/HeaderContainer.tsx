@@ -5,25 +5,22 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import axios from 'axios';
 import {Preloader} from '../common/preloader/Preloader';
+import {authAPI} from '../../api/api';
 
 
-
-class HeaderContainer extends React.Component<AuthPropsType>{
+class HeaderContainer extends React.Component<AuthPropsType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
-            withCredentials: true
-        })
+        authAPI.me()
             .then(response => {
-
-                if (response.data.resultCode === 0) {
-                    this.props.toggleIsFetching(false)
-                    let {id,login,email} = response.data.data
-                    this.props.setUserData(id,login,email)
+                    if (response.data.resultCode === 0) {
+                        this.props.toggleIsFetching(false)
+                        let {id, login, email} = response.data.data
+                        this.props.setUserData(id, login, email)
+                    }
                 }
-            }
-        )
+            )
     }
 
     render() {
@@ -31,10 +28,11 @@ class HeaderContainer extends React.Component<AuthPropsType>{
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Header {...this.props}
-        />
+            />
         </>
     }
 }
+
 type MapStatePropsType = {
     data: AuthDataType
     resultCode: number
@@ -43,7 +41,7 @@ type MapStatePropsType = {
     isFetching: boolean
 }
 type MapDispatchPropsType = {
-    setUserData: (id:number, login: string, email: string) => void
+    setUserData: (id: number, login: string, email: string) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
 export type AuthPropsType = MapStatePropsType & MapDispatchPropsType
