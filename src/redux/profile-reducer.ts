@@ -61,16 +61,15 @@ export const changeNewTextCallback = (newText: string) => ({
     type: CHANGE_NEW_TEXT_CALLBACK,
     newText
 }) as const
-export const setUserProfile = (profile: null) => ({
+const setUserProfile = (profile: null) => ({
     type: SET_USER_PROFILE,
     profile
 }) as const
 
 //Thunk
-/*
-export const getProfile = (userId: string | undefined) => (dispatch: Dispatch) => {
+export const getUserProfile = (userId: string | undefined) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfile(response.data))
         })
-}*/
+}

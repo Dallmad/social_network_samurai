@@ -2,9 +2,8 @@ import React, {FC, useEffect} from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
-import {setUserProfile} from '../../redux/profile-reducer';
+import {getUserProfile} from '../../redux/profile-reducer';
 import {useParams} from 'react-router-dom';
-import {usersAPI} from '../../api/api';
 
 
 export const ProfileContainer: FC<ProfilePropsType> = (props) => {
@@ -13,10 +12,7 @@ export const ProfileContainer: FC<ProfilePropsType> = (props) => {
     let userId:string | undefined = params['*']
     if (!userId) {userId='25'}
     useEffect(() => {
-           usersAPI.getProfile(userId)
-               .then(response => {
-                props.setUserProfile(response.data)
-            })
+        props.getUserProfile(userId)
     }, [])
 
     return (
@@ -31,8 +27,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export default connect(mapStateToProps, {
-    setUserProfile,
-    // getProfile
+    getUserProfile
 })(ProfileContainer)
 
 
@@ -40,10 +35,11 @@ type MapStatePropsType = {
     profile: null
 }
 type MapDispatchPropsType = {
-    setUserProfile: (profile: null) => void
-    // getProfile:(userId: string | undefined)=> void
+    getUserProfile:(userId: string | undefined)=> void
 }
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
+
+
 
 // type ContactsType = {
 //     github: string
