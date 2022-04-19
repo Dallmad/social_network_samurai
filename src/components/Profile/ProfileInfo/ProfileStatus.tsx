@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const ProfileStatus = (props: any) => {
+export const ProfileStatus = (props: ProfileStatusType) => {
     const [editMode, setEditMode] = useState(false)
 
     const activateEditMode = () => {
@@ -26,17 +26,20 @@ export const ProfileStatus = (props: any) => {
     )
 }
 
+type ProfileStatusType = {
+    status: string
+}
 
 /*class ProfileStatus extends React.Component<any, any> {
     state = {
         editMode: false
     }
-    activatedEditMode() {
+    activatedEditMode = () => {
     this.setState({
         editMode: true
         })
 }
-deactivateEditMode() {
+deactivateEditMode = () => {
     this.setState({
         editMode: false
         })
@@ -46,12 +49,12 @@ deactivateEditMode() {
             <>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activatedEditMode.bind(this)}>{this.props.status}</span>
+                        <span onDoubleClick={this.activatedEditMode}>{this.props.status}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input value={this.props.status} onBlur={this.deactivateEditMode.bind(this)}/>
+                        <input value={this.props.status} onBlur={this.deactivateEditMode}/>
                     </div>
                 }
             </>
