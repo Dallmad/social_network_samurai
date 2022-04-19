@@ -1,5 +1,7 @@
 import s from './ProfileInfo.module.css'
-import {Preloader} from '../../common/preloader/Preloader';
+import {Preloader} from '../../common/preloader/Preloader'
+import userPhoto from '../../../assets/images/img.png'
+import {ProfileStatus} from './ProfileStatus';
 
 type ContactsType = {
     github: string
@@ -27,18 +29,22 @@ type ProfileInfoType = {
     profile: ProfileType | null
 }
 
-export const ProfileInfo = (props:ProfileInfoType) => {
+export const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) {
         return <Preloader/>
     }
     return <div>
         <div>
-            <img className={s.img} src='https://www.meme-arsenal.com/memes/0a5bb7478b7e122896daece13d9c36e7.jpg'/>
+            <img className={s.img} src="https://www.meme-arsenal.com/memes/0a5bb7478b7e122896daece13d9c36e7.jpg"/>
         </div>
         <div className={s.descriptionBlock}>
-            <img src={props.profile.photos.large}/>
+            <img src={props.profile.photos.large
+                ? props.profile.photos.large
+                : userPhoto
+            }/>
             <div>{props.profile.fullName}</div>
             <div>{props.profile.lookingForAJobDescription}</div>
+            <ProfileStatus/>
         </div>
     </div>
 }

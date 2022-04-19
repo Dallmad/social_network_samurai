@@ -3,9 +3,6 @@ import userPhoto from '../../assets/images/img.png';
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
-import {usersAPI} from '../../api/api';
-
 
 type UsersFCPropsType = {
     totalUsersCount: number
@@ -15,7 +12,6 @@ type UsersFCPropsType = {
     users: UserType[]
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    // toggleIsFollowingProgress: (userId: number,isFetching: boolean) => void
     followingInProgress: number[]
 }
 

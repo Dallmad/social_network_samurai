@@ -3,6 +3,11 @@
     padding: 10px;
     color: rgba(162, 122, 122, 0.85);
 }
+.descriptionBlock img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
 .img {
     width: auto;
     height: 200px;
