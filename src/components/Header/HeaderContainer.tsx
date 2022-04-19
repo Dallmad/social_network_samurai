@@ -5,8 +5,6 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {Preloader} from '../common/preloader/Preloader';
 
-
-
 class HeaderContainer extends React.Component<AuthPropsType> {
 
     componentDidMount() {
@@ -46,5 +44,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export default connect(mapStateToProps, {
-    getAuthUserData,
+    getAuthUserData
 })(HeaderContainer)
