@@ -27,6 +27,8 @@ type ProfileType = {
 }
 type ProfileInfoType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -34,9 +36,9 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         return <Preloader/>
     }
     return <div>
-        <div>
+       {/* <div>
             <img className={s.img} src="https://www.meme-arsenal.com/memes/0a5bb7478b7e122896daece13d9c36e7.jpg"/>
-        </div>
+        </div>*/}
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large
                 ? props.profile.photos.large
@@ -44,7 +46,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             }/>
             <div>{props.profile.fullName}</div>
             <div>{props.profile.lookingForAJobDescription}</div>
-            <ProfileStatus status={'djgdj'}/>
+            <ProfileStatus {...props}/>
         </div>
     </div>
 }
