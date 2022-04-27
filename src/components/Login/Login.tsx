@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import {AppStateType} from '../../redux/redux-store';
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from '@mui/material';
 import s from './Login.module.css'
+import {login} from '../../redux/auth-raducer';
 
 type FormikErrorType = {
     email?: string
@@ -15,7 +16,7 @@ type FormikErrorType = {
 export const LoginPage = () => {
 
     const dispatch = useDispatch()
-    //const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
+    const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
 
     const formik = useFormik({
         initialValues: {
@@ -38,16 +39,14 @@ export const LoginPage = () => {
             return errors;
         },
         onSubmit: values => {
-            //dispatch(loginTC(values))
+            dispatch(login(values))
             formik.resetForm()
         },
     })
 
-   /* if (isLoggedIn) {
-        return <Navigate to='/'/>
+    if (isAuth) {
+        return <Navigate to='/profile'/>
     }
-*/
-
     return <Grid container justifyContent={'center'} >
         <Grid item justifyContent={'center'}>
             <FormControl>
@@ -72,7 +71,7 @@ export const LoginPage = () => {
                         />
                         {formik.touched.email && formik.errors.email
                             && <div style={{color: 'red'}}>{formik.errors.email}</div>}
-                        <TextField className={s.MuiFilledInputInput}
+                        <TextField
                             type="password"
                             label="Password"
                             margin="normal"

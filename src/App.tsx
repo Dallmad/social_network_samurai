@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css'
 import {Navbar} from "./components/Navbar/Navbar";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import {LoginPage} from './components/Login/Login';
-import {Dialogs} from './components/Dialogs/Dialogs';
+
 
 
 
@@ -23,6 +23,9 @@ const App = () => {
                     <Route path='/messages/*' element={<DialogsContainer/>}/>
                     <Route path='/users/*' element={<UsersContainer/>}/>
                     <Route path='/login/*' element={<LoginPage/>}/>
+                    <Route path="/404" element={
+                        <h1 style={{textAlign: 'center'}}>404 page not found</h1>}/>
+                    <Route path="*" element={<Navigate to={'404'}/>}/>
                 </Routes>
             </div>
         </div>
