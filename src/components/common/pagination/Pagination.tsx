@@ -1,4 +1,3 @@
-import s from '../../Users/users.module.css';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
@@ -32,15 +31,13 @@ export const PaginationFC = (props: PaginationType) => {
                     showLastButton
                     page={page}
                     onChange={handleChange}
-                    size="large"
-                    color="primary"
+                    size='large'
+                    color='primary'
                     boundaryCount={2}
                     siblingCount={2}
                 />
 
             </Stack>
-
-
             {/*{pages.map((p, i) => {
                 return <span key={p + '-' + i} className={usersPage.currentPage === p ? s.selectedPage : ''}
                              onClick={() => {
@@ -51,10 +48,11 @@ export const PaginationFC = (props: PaginationType) => {
         </div>
     )
 }
+
+//types
 type PaginationType = {
     onPagesChanged: (pageNumber: number) => void
 }
-
 type usersPageType = {
     users: UserType[]
     pageSize: number
