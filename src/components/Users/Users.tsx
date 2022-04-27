@@ -3,6 +3,7 @@ import userPhoto from '../../assets/images/img.png';
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
+import {PaginationFC} from '../common/pagination/Pagination';
 
 type UsersFCPropsType = {
     totalUsersCount: number
@@ -18,23 +19,9 @@ type UsersFCPropsType = {
 
 export const Users: React.FC<UsersFCPropsType> = (props) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages: number[] = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
     return (
         <div>
-            <div>
-                {pages.map((p, i) => {
-                    return <span key={p + '-' + i} className={props.currentPage === p ? s.selectedPage : ''}
-                                 onClick={() => {
-                                     props.onPagesChanged(p)
-                                 }}>{p}</span>
-                })
-                }
-            </div>
+            <PaginationFC onPagesChanged={props.onPagesChanged} />
             {
                 props.users.map(u => <div key={u.id}>
                     <span>
@@ -78,3 +65,7 @@ export const Users: React.FC<UsersFCPropsType> = (props) => {
         </div>
     );
 }
+
+
+
+
