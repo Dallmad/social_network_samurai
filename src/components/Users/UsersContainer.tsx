@@ -14,7 +14,7 @@ import {compose} from 'redux';
 class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-       this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPagesChanged = (pageNumber: number) => {
@@ -51,8 +51,8 @@ type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setCurrentPage: (pageNumber: number) => void
-    toggleIsFollowingProgress: (userId: number,isFetching: boolean) => void
-    getUsers:(currentPage: number, pageSize: number) => void
+    toggleIsFollowingProgress: (userId: number, isFetching: boolean) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType

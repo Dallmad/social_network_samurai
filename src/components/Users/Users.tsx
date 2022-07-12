@@ -1,6 +1,6 @@
 import s from './users.module.css';
 import userPhoto from '../../assets/images/img.png';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {UserType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
 import {PaginationFC} from '../common/pagination/Pagination';

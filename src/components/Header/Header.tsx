@@ -4,6 +4,7 @@ import {FC} from 'react';
 import {AuthDataType, logout} from '../../redux/auth-raducer';
 import {Button} from '@mui/material';
 import {useDispatch} from 'react-redux';
+import gif from '../../assets/images/loading-gears.gif'
 
 type HeaderPropsType = {
     data: AuthDataType
@@ -25,9 +26,13 @@ export const Header: FC<HeaderPropsType> = ({
 
     return <header className={s.header}>
 
-        <img src="https://gazacademy.ru/wp-content/uploads/2019/04/loading-gears-animation-3.gif"/>
+        <img src={gif}/>
         <div className={s.loginBlock}>
-            {isAuth ? <Button color="inherit" onClick={logoutHandler}>Logout</Button>
+            {isAuth ?
+                <div>
+                    Hello,{data.login}!
+                    <Button color="inherit" style={{marginLeft: 50}} onClick={logoutHandler}>Logout</Button>
+                </div>
                 : <NavLink to={'/login'}>Login</NavLink>}
         </div>
     </header>

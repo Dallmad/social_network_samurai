@@ -4,6 +4,7 @@ import {handleServerAppError, handleServerNetworkError} from '../utils/error-uti
 import {setAppStatusAC} from './app-reducer';
 
 const SET_USER_DATA = 'SET_USER_DATA'
+const SET_IS_AUTH = 'SET-IS-AUTH'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 export type AuthDataType = {
@@ -21,10 +22,10 @@ export type AuthType = {
 }
 
 export type AuthActionTypes = ReturnType<typeof setAuthUserData>
-| ReturnType<typeof toggleIsFetching> | ReturnType<typeof setIsAuth>
+    | ReturnType<typeof toggleIsFetching> | ReturnType<typeof setIsAuth>
 
 let initialState = {
-    data: {id: 0, login: '',email: ''},
+    data: {id: 0, login: '', email: ''},
     resultCode: 0,
     messages: [],
     isAuth: false,
@@ -37,31 +38,32 @@ export const authReducer = (state: AuthType = initialState,
         case SET_USER_DATA:
             return {
                 ...state,
-                data:action.data,
+                data: action.data,
                 isAuth: true
             }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
-        case 'SET-IS-AUTH':
+        case SET_IS_AUTH:
             return {...state, isAuth: action.isAuth}
         default:
             return state
     }
 }
-const setAuthUserData = (id:number, login: string, email: string) => ({
+const setAuthUserData = (id: number, login: string, email: string) => ({
     type: SET_USER_DATA,
-    data: {id,login,email}
+    data: {id, login, email}
 }) as const
 const toggleIsFetching = (isFetching: boolean) => ({
-    type: TOGGLE_IS_FETCHING, isFetching}) as const
+    type: TOGGLE_IS_FETCHING, isFetching
+}) as const
 export const setIsAuth = (isAuth: boolean) =>
-    ({type: 'SET-IS-AUTH', isAuth} as const)
+    ({type: SET_IS_AUTH, isAuth} as const)
 
 //thunks
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
-    authAPI.me()
+    return authAPI.me()
         .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(toggleIsFetching(false))
@@ -78,7 +80,9 @@ export const login = (data: LoginParamsType) => (dispatch: Dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsAuth(true))
                 dispatch(setAppStatusAC('succeeded'))
-            } else {handleServerAppError(res.data, dispatch)}
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
         })
         .catch((error) => {
             handleServerNetworkError(error, dispatch);
@@ -91,7 +95,6 @@ export const logout = () => (dispatch: Dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsAuth(false))
                 dispatch(setAppStatusAC('succeeded'))
-                //dispatch(clearTodosDataAC())
             } else {
                 handleServerAppError(res.data, dispatch)
             }

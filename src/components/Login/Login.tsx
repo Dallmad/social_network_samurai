@@ -17,6 +17,7 @@ export const LoginPage = () => {
 
     const dispatch = useDispatch()
     const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
+    const error = useSelector<AppStateType, string|null>(state => state.app.error)
 
     const formik = useFormik({
         initialValues: {
@@ -92,6 +93,7 @@ export const LoginPage = () => {
                         >
                             Login
                         </Button>
+                        {error && <div style={{color: 'red'}}>{error}</div>}
                     </FormGroup>
                 </form>
 

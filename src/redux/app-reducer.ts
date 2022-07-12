@@ -1,8 +1,12 @@
 import {Dispatch} from 'redux';
 import {authAPI} from '../api/api';
-import {setIsAuth} from './auth-raducer';
+import {getAuthUserData, setIsAuth} from './auth-raducer';
 import {handleServerAppError, handleServerNetworkError} from '../utils/error-utils';
 
+
+const APP_SET_STATUS = 'APP/SET-STATUS'
+const APP_SET_ERROR = 'APP/SET-ERROR'
+const APP_SET_INITIALIZED = 'APP/SET-IS-INITIALIZED'
 
 const initialState: InitialStateType = {
     status: 'idle',
@@ -12,11 +16,11 @@ const initialState: InitialStateType = {
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case 'APP/SET-STATUS':
+        case APP_SET_STATUS:
             return {...state, status: action.status}
-        case 'APP/SET-ERROR':
+        case APP_SET_ERROR:
             return {...state, error: action.error}
-        case 'APP/SET-IS-INITIALIZED':
+        case APP_SET_INITIALIZED:
             return {...state, isInitialized: action.isInitialized}
         default:
             return {...state}
@@ -24,28 +28,16 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 }
 
 //action creators
-export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-IS-INITIALIZED', isInitialized} as const)
+export const setAppErrorAC = (error: string | null) => ({type: APP_SET_ERROR, error} as const)
+export const setAppStatusAC = (status: RequestStatusType) => ({type: APP_SET_STATUS, status} as const)
+export const setIsInitializedAC = (isInitialized: boolean) => ({type: APP_SET_INITIALIZED, isInitialized} as const)
 
 //thunks
 export const initializeAppTC = () => (dispatch: Dispatch) => {
-    dispatch(setAppStatusAC('loading'))
-    authAPI.me()
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setIsAuth(true))
-                dispatch(setAppStatusAC('succeeded'))
-            } else {
-                handleServerAppError(res.data, dispatch)
-            }
-        })
-        .catch((error) => {
-            handleServerNetworkError(error, dispatch);
-        })
-        .finally(() => {
-            dispatch(setIsInitializedAC(true))
-        })
+    let promise = dispatch(getAuthUserData() as any)
+    promise.then(() => {
+        dispatch(setIsInitializedAC(true))
+    })
 }
 //types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
